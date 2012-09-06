@@ -6,7 +6,7 @@ This version includes CORS support and CSS3 fullscreen options. This version als
 
 ## Demo
 
-Check out the demo [here](http://www.n9nemedia.net/stackblur)
+Check out the demo [here](http://www.n9nemedia.net/demo/stackblur)
 
 ## Requirements
 
