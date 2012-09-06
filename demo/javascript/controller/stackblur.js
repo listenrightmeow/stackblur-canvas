@@ -51,7 +51,6 @@ var Blur = Class.extend({
     }
   },
   init : function(options) {
-    if(!options.hasOwnProperty('el') || !options.hasOwnProperty('el')) throw new Error('Element and/or image path is required.');
     for(var key in options) this.defaults[key] = options[key];
     if(this.defaults.fullscreen) for(var key in this.defaults.styles) this.defaults.el.style[key] = this.defaults.styles[key];
 
