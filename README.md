@@ -4,6 +4,10 @@ Based upon [Quasimondo's blur algorithm](http://www.quasimondo.com/StackBlurForC
 
 This version includes CORS support and CSS3 fullscreen options. This version also converts image data to base64 encoding for caching and POST use. As of now only .png and .jpg file types are suppoted.
 
+## Demo
+
+Check out the demo [here](http://www.n9nemedia.net/stackblur)
+
 ## Requirements
 
 This example utilizes [Simple Javascript Inheritance by John Resig](http://ejohn.org/blog/simple-javascript-inheritance/).
