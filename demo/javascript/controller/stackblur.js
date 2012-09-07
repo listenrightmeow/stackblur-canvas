@@ -60,40 +60,45 @@ var Blur = Class.extend({
 
     img.src = options.path;
     img.onload = function(e) {
-      var w = img.naturalWidth,
-          h = img.naturalHeight,    
-          canvas = document.createElement('canvas');
+      var canvas = document.createElement('canvas');
+
+      self.defaults.width = img.naturalWidth;
+      self.defaults.height = img.naturalHeight;
 
       canvas.id = 'canvas';
       canvas.style.display = 'none';
-      canvas.style.width  = w + 'px';
-      canvas.style.height = h + 'px';
-      canvas.width = w;
-      canvas.height = h;
+      canvas.style.width  = self.defaults.width + 'px';
+      canvas.style.height = self.defaults.height + 'px';
+      canvas.width = self.defaults.width;
+      canvas.height = self.defaults.height;
       
       document.body.insertBefore(canvas, document.body.childNodes[0]);
 
       var context = canvas.getContext('2d');
-          context.clearRect(0, 0, w, h);
+          context.clearRect(0, 0, self.defaults.width, self.defaults.height);
           context.drawImage(img, 0, 0);
 
       if (isNaN(radius) || radius < 1) throw new Error('Radius required.');
       
       if (options.path.match(/\w.\S+png/))
-        self.stackBlurCanvasRGBA(0, 0, w, h, function(){
+        self.stackBlurCanvasRGBA(function(){
           self.swap(canvas.toDataURL('image/png'));
         });
       else
-        self.stackBlurCanvasRGB(0, 0, w, h, function(){
+        self.stackBlurCanvasRGB(function(){
           self.swap(canvas.toDataURL('image/jpg'));
         });
     };
   },
-  stackBlurCanvasRGBA : function(top_x, top_y, width, height, callback) {
+  stackBlurCanvasRGBA : function(callback) {
     var self = this,
         canvas  = document.getElementById('canvas'),
         context = canvas.getContext('2d'),
         radius = this.defaults.radius,
+        top_x = 0,
+        top_y = 0,
+        width = this.defaults.width,
+        height = this.defaults.height,
         imageData;
 
     if (isNaN(radius) || radius < 1) return;
@@ -335,11 +340,15 @@ var Blur = Class.extend({
     context.putImageData(imageData, top_x, top_y);
     callback();
   },
-  stackBlurCanvasRGB : function(top_x, top_y, width, height, callback) {
+  stackBlurCanvasRGB : function(callback) {
     var self = this,
         canvas  = document.getElementById('canvas'),
         context = canvas.getContext('2d'),
         radius = this.defaults.radius,
+        top_x = 0,
+        top_y = 0,
+        width = this.defaults.width,
+        height = this.defaults.height,
         imageData;
 
     if (isNaN(radius) || radius < 1) return;
