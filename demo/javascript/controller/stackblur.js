@@ -38,7 +38,6 @@ var Blur = Class.extend({
       24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24
     ],
     fullscreen : false,
-    setAsBackground : true,
     styles : {
       backgroundRepeat : 'no-repeat',
       backgroundPosition : 'center center',
@@ -573,11 +572,10 @@ var Blur = Class.extend({
     c.parentNode.removeChild(c);
   },
   swap : function(base) {
-    var self = this;
     this.remove('canvas');
-    if(this.defaults.setAsBackground)
-      this.defaults.el.style.backgroundImage = 'url(' + base + ')';
-    else
+    if(this.defaults.el instanceof HTMLImageElement)
       this.defaults.el.src = base;
+    else
+      this.defaults.el.style.backgroundImage = 'url(' + base + ')';
   }
 });
